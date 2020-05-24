@@ -5,7 +5,7 @@ from dbConnection import insertStatus
 
 switch = 0
 
-MODES= {
+MODES = {
     0: "AUTO",
     1: "AUTO",
     2: "DEHUMIDIFY",
@@ -33,8 +33,8 @@ def get_info(ip):
 
     return res
 
-if __name__ == '__main__':
 
+if __name__ == '__main__':
     while True:
         try:
             unit_1 = get_info('192.168.50.50')
@@ -49,4 +49,4 @@ if __name__ == '__main__':
             print(e)
 
         print("sleep 5 minutes")
-        time.sleep(60*5)
+        time.sleep(60 * 5)
