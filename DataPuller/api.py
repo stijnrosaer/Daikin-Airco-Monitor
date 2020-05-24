@@ -37,14 +37,14 @@ if __name__ == '__main__':
 
     while True:
         try:
-            status_stijn = get_info('192.168.50.50')
-            insertStatus(status_stijn)
+            unit_1 = get_info('192.168.50.50')
+            insertStatus(unit_1)
         except Exception as e:
             print(e)
 
         try:
-            status_senne = get_info('192.168.50.76')
-            insertStatus(status_senne)
+            unit_2 = get_info('192.168.50.76')
+            insertStatus(unit_2)
         except Exception as e:
             print(e)
 
