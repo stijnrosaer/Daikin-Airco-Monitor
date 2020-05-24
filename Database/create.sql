@@ -1,0 +1,1 @@
+CREATE DATABASE airco_db;

@@ -1,0 +1,1 @@
+*/5 * * * * python3 /home/stijn/Desktop/aircoAPI/api.py
