@@ -1,6 +1,6 @@
-
 """
 Python module to get metrics from and control Daikin airconditioners
+Source: https://github.com/arska/python-daikinapi/blob/d98d2f2217b59b4243900319b2af9ed22ecdbdc6/daikinapi.py#L243
 """
 
 import logging
@@ -22,17 +22,12 @@ class Daikin:
         "target_temperature",
         "target_humidity",
         "mode",
-        "fan_rate",
-        "fan_direction",
         "mac",
         "name",
         "rev",
         "ver",
         "type",
-        "today_runtime",
         "current_month_power_consumption",
-        "price_int",
-        "compressor_frequency",
         "inside_temperature",
         "outside_temperature",
     ]
@@ -80,14 +75,6 @@ class Daikin:
         """
         return self._get("/common/basic_info")
 
-    def _get_notify(self):
-        """
-        Example:
-        ret=OK,auto_off_flg=0,auto_off_tm=- -
-        :return: dict
-        """
-        return self._get("/common/get_notify")
-
     def _get_week(self):
         """
         Example:
@@ -103,14 +90,6 @@ class Daikin:
         :return: dict
         """
         return self._get("/aircon/get_week_power_ex")
-
-    def _get_target(self):
-        """
-        Example:
-        ret=OK,target=0
-        :return: dict
-        """
-        return self._get("/aircon/get_target")
 
     def _get_sensor(self):
         """
@@ -149,14 +128,6 @@ class Daikin:
         """
         return self._get("/aircon/get_model_info")
 
-    def _get_remote(self):
-        """
-        Example:
-        ret=OK,method=home only,notice_ip_int=3600,notice_sync_int=60
-        :return: dict
-        """
-        return self._get("/common/get_remote_method")
-
     @property
     def power(self):
         """
@@ -177,14 +148,6 @@ class Daikin:
             return float(ret_val)
         except:
             return None
-
-    @property
-    def target_humidity(self):
-        """
-        target humidity
-        :return: 0
-        """
-        return float(self._get_control()["shum"])
 
     @property
     def mode(self):
@@ -236,22 +199,6 @@ class Daikin:
         return self._get_basic()["type"]
 
     @property
-    def today_runtime(self):
-        """
-        unit run time today
-        :return: minutes of runtime
-        """
-        return int(self._get_week()["today_runtime"])
-
-    @property
-    def current_month_power_consumption(self):
-        """
-        energy consumption
-        :return: current month to date energy consumption in kWh
-        """
-        return int(self._get_year()["this_year"].split("/")[-1])
-
-    @property
     def current_day_power_consumption_heat(self):
         ret = self._get_week_ex()["week_heat"].split("/")[0]
         return ret
@@ -259,14 +206,6 @@ class Daikin:
     @property
     def current_day_power_consumption_cool(self):
         return self._get_week_ex()["week_cool"].split("/")[0]
-
-    @property
-    def compressor_frequency(self):
-        """
-        compressor frequency/power
-        :return:
-        """
-        return int(self._get_sensor()["cmpfreq"])
 
     @property
     def inside_temperature(self):
@@ -284,25 +223,7 @@ class Daikin:
         """
         return float(self._get_sensor()["otemp"])
 
-    def _get_all(self):
-        """
-        Get and aggregate all data endpoints
-        :return: dict of all aircon parameters
-        """
-        fields = {}
-        fields.update(self._get_basic())
-        fields.update(self._get_notify())
-        fields.update(self._get_week())
-        fields.update(self._get_target())
-        fields.update(self._get_sensor())
-        fields.update(self._get_control())
-        fields.update(self._get_model())
-        fields.update(self._get_remote())
-        return fields
-
     def __str__(self):
         return "Daikin(host={0},name={1},mac={2})".format(
             self._host, self.name, self.mac
         )
-
-
