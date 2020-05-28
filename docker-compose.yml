@@ -11,7 +11,7 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
     volumes:
-    - airco_db_volume
+    - airco_db_volume:/var/lib/airco/postgresql/data
 
   airco_data_puller:
     build:
@@ -29,7 +29,7 @@ services:
     environment:
       - TZ=Europe/Brussels
     volumes:
-    - grafana_volume
+    - grafana_volume:/var/lib/grafana/data
 
 volumes:
   airco_db_volume:
