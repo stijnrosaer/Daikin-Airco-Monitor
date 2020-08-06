@@ -17,11 +17,12 @@ class Status(db.Model):
     cool = db.Column(db.INTEGER)
     mode = db.Column(db.VARCHAR)
     power = db.Column(db.INTEGER)
+    fan = db.Column(db.VARCHAR)
 
 
 def insertStatus(status):
     stat = Status(name=status['name'], time=status['time'], target=status['target'], inside=status['inside'],
                   outside=status['outside'], heat=status['heat'], cool=status['cool'], mode=status['mode'],
-                  power=status['power'])
+                  power=status['power'], fan=status['fan'])
     db.session.add(stat)
     db.session.commit()
