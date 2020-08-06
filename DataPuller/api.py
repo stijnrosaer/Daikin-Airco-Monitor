@@ -47,21 +47,18 @@ def get_info(ip):
 
 
 if __name__ == '__main__':
-    unit_1 = get_info('192.168.50.50')
-    print("oke")
-    # insertStatus(unit_1)
-    # while True:
-    #     try:
-    #         unit_1 = get_info('192.168.50.50')
-    #         insertStatus(unit_1)
-    #     except Exception as e:
-    #         print(e)
-    #
-    #     try:
-    #         unit_2 = get_info('192.168.50.76')
-    #         insertStatus(unit_2)
-    #     except Exception as e:
-    #         print(e)
-    #
-    #     print("sleep 5 minutes")
-    #     time.sleep(60 * 5)
+    while True:
+        try:
+            unit_1 = get_info('192.168.50.50')
+            insertStatus(unit_1)
+        except Exception as e:
+            print(e)
+
+        try:
+            unit_2 = get_info('192.168.50.76')
+            insertStatus(unit_2)
+        except Exception as e:
+            print(e)
+
+        print("sleep 5 minutes")
+        time.sleep(60 * 5)
