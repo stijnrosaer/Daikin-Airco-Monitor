@@ -16,6 +16,17 @@ MODES = {
 
 }
 
+FAN = {
+    'A': "AUTO",
+    'B': "QUIET",
+    '3': "Niveau 1",
+    '4': "Niveau 2",
+    '5': "Niveau 3",
+    '6': "Niveau 4",
+    '7': "Niveau 5"
+
+}
+
 
 def get_info(ip):
     API = Daikin(str(ip))
@@ -29,24 +40,28 @@ def get_info(ip):
     res["heat"] = API.current_day_power_consumption_heat
     res["cool"] = API.current_day_power_consumption_cool
     res["mode"] = MODES.get(API.mode)
+    res["fan"] = FAN.get(API.fRate)
     res["power"] = int(API.power)
 
     return res
 
 
 if __name__ == '__main__':
-    while True:
-        try:
-            unit_1 = get_info('192.168.50.50')
-            insertStatus(unit_1)
-        except Exception as e:
-            print(e)
-
-        try:
-            unit_2 = get_info('192.168.50.76')
-            insertStatus(unit_2)
-        except Exception as e:
-            print(e)
-
-        print("sleep 5 minutes")
-        time.sleep(60 * 5)
+    unit_1 = get_info('192.168.50.50')
+    print("oke")
+    # insertStatus(unit_1)
+    # while True:
+    #     try:
+    #         unit_1 = get_info('192.168.50.50')
+    #         insertStatus(unit_1)
+    #     except Exception as e:
+    #         print(e)
+    #
+    #     try:
+    #         unit_2 = get_info('192.168.50.76')
+    #         insertStatus(unit_2)
+    #     except Exception as e:
+    #         print(e)
+    #
+    #     print("sleep 5 minutes")
+    #     time.sleep(60 * 5)

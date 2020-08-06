@@ -159,6 +159,10 @@ class Daikin:
         return int(self._get_control()["mode"])
 
     @property
+    def fRate(self):
+        return self._get_control()["f_rate"]
+
+    @property
     def mac(self):
         """
         wifi module mac address
